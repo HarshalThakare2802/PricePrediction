@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+        input:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .prediction {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Real Estate Price Predictor</h1>
+    <form action="/predict" method="post">
+        <label for="Location">Location:</label>
+        <input type="text" id="Location" name="Location"  value="{{ form_data['Location'] if form_data else '' }}" required>
+
+        <label for="Bedrooms">Bedrooms:</label>
+        <input type="number" id="Bedrooms" name="Bedrooms"  value="{{ form_data['Bedrooms'] if form_data else '' }}" required>
+
+        <label for="Bathrooms">Bathrooms:</label>
+        <input type="number" id="Bathrooms" name="Bathrooms"  value="{{ form_data['Bathrooms'] if form_data else '' }}" required>
+
+        <label for="Sqft_Living">Living Area (sqft):</label>
+        <input type="number" id="Sqft_Living" name="Sqft_Living"  value="{{ form_data['Sqft_Living'] if form_data else '' }}" required>
+
+        <label for="Sqft_Lot">Lot Area (sqft):</label>
+        <input type="number" id="Sqft_Lot" name="Sqft_Lot"  value="{{ form_data['Sqft_Lot'] if form_data else '' }}" required>
+
+        <label for="Floors">Floors:</label>
+        <input type="number" step="0.1" id="Floors" name="Floors"  value="{{ form_data['Floors'] if form_data else '' }}" required>
+
+        <label for="Sqft_Above">Above Area (sqft):</label>
+        <input type="number" id="Sqft_Above" name="Sqft_Above"  value="{{ form_data['Sqft_Above'] if form_data else '' }}" required>
+
+        <label for="Sqft_Basement">Basement Area (sqft):</label>
+        <input type="number" id="Sqft_Basement" name="Sqft_Basement"  value="{{ form_data['Sqft_Basement'] if form_data else '' }}" required>
+
+        <label for="Yr_Built">Year Built:</label>
+        <input type="number" id="Yr_Built" name="Yr_Built"  value="{{ form_data['Yr_Built'] if form_data else '' }}" required>
+
+        <label for="Yr_Renovated">Year Renovated:</label>
+        <input type="number" id="Yr_Renovated" name="Yr_Renovated"  value="{{ form_data['Yr_Renovated'] if form_data else '' }}" required>
+
+        <label for="Sqft_Living15">Living Area (15 nearest houses):</label>
+        <input type="number" id="Sqft_Living15" name="Sqft_Living15"  value="{{ form_data['Sqft_Living15'] if form_data else '' }}" required>
+
+        <label for="Sqft_Lot15">Lot Area (15 nearest houses):</label>
+        <input type="number" id="Sqft_Lot15" name="Sqft_Lot15"  value="{{ form_data['Sqft_Lot15'] if form_data else '' }}" required>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="prediction">
+            <h2>{{ prediction_text }}</h2>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
